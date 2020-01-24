@@ -1,0 +1,6 @@
+start
+
+#me
+hello, meat bag! say something to make this test case a success, please!
+
+#bot

@@ -1,0 +1,9 @@
+{
+  "botium": {
+    "Capabilities": {
+      "PROJECTNAME": "botium-sample",
+      "CONTAINERMODE": "webspeech",
+      "WEBSPEECH_BROWSER_APP1": "chrome"
+    }
+  }
+}
