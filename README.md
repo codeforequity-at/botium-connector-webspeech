@@ -13,6 +13,12 @@ __Did you read the [Botium in a Nutshell](https://medium.com/@floriantreml/botiu
 ## How it works ?
 Botium starts a web browser and utilizes the integrated Webspeech controls to start a conversation with whoever is sitting in front of the workstation. This can be a human, but also an Alexa or Google device.
 
+Botium is able to use the [Web Speech API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API) for running the test conversations.
+* For the user part of the conversation, the Web Speech API outputs voice to the system speaker
+* For the chatbot part of the conversation, the Web Speech API listens for voice with the system microphone
+
+Naturally, a browser supporting the SpeechRecognition and the SpeechSynthesis of the Web Speech API is a precondition - see [here](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API#Browser_compatibility) for an overview - a not too old Chrome is a good choice.
+
 **For obvious reasons, this Botium connector only works on a workstation with graphical user interface, not in a typical CI/CD environment**
 
 It can be used as any other Botium connector with all Botium Stack components:
@@ -86,3 +92,37 @@ const Defaults = {
   [Capabilities.WEBSPEECH_BROWSER_APP]: 'chrome'  
 }
 ```
+
+### WEBSPEECH_SERVER_PORT
+_Default: 46050_
+
+Botium opens up a temporary local web server to inject some Botium code into the browser. The port number can be choosen, but usually the default settings are fine.
+
+### WEBSPEECH_BROWSER_APP
+
+Botium uses the [opn](https://github.com/sindresorhus/opn) library to open the system default application for opening a web site. What browser is actually opened depends on system settings. To force a specific browser to be opened, the "app" option of the opn-library can be changed (for example, "chrome" on Windows).
+
+### WEBSPEECH_CLOSEBROWSER
+_Default: true_
+
+Sometimes it can be useful to leave the browser window open after running a test case (attention: when running multiple test cases, lots of browser windows will stay open). Mainly for debugging purposes - you can open the Javascript console of the browser of WebSpeech API is failing.
+
+### WEBSPEECH_LANGUAGE
+_Default: "en-US"_
+
+The language to use in speech recognition and speech synthesis.
+See:
+* https://developer.mozilla.org/en-US/docs/Web/API/SpeechRecognition/lang
+* https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesisUtterance/lang
+
+### WEBSPEECH_PITCH, WEBSPEECH_RATE, WEBSPEECH_VOLUME, WEBSPEECH_VOICE
+
+With these capabilities the SpeechSynthesis can be adapted.
+See: 
+* https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesisUtterance
+
+
+
+
+
+
